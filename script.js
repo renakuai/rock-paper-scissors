@@ -5,8 +5,7 @@ function computerPlay() {
     return result;
     };
 
-function playRound(playerSelection) {
-    let computerSelection = computerPlay();
+function playRound(playerSelection, computerSelection) {
     if ((playerSelection == 'scissors' && computerSelection == 'paper') || (playerSelection == 'rock' && computerSelection == 'scissors') || (playerSelection == 'paper' && computerSelection == 'rock')) {
         return ('You have won!' + ' ' + playerSelection.toUpperCase() + ' ' + 'beats' + ' ' + computerSelection.toUpperCase() +'.')
         + (' ' + 'Your score:' + ' ' + ++yourScore + '.' + ' ' + 'Computer score:' + ' ' + computerScore + '.');
@@ -30,6 +29,7 @@ function results() {
     }
 };
 
+let computerScore;
 let yourScore = 0;
 let computerScore = 0;
 let playerPrompt = prompt('Rock, paper, or scissors?', ' ');
