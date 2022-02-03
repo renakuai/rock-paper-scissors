@@ -22,9 +22,13 @@ function playRound(playerSelection) {
 };
 
 function results() {
-    (yourScore > computerScore) ? 'Yay, you won!' :
-    'Boo you lost.';
-}
+    if (yourScore > computerScore) {
+        return 'Yay, you won!';
+    }
+    else if (yourScore < computerScore) {
+        return 'Boo you lost.';
+    }
+};
 
 let yourScore = 0;
 let computerScore = 0;
