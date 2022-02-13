@@ -5,53 +5,92 @@ function computerPlay() {
     };
 
 // play a single round 
-function playRound(event, computerSelection) {
-    computerSelection = computerPlay();
-    let playerSelection = event.target.id;
+function playRound(playerSelection, computerSelection) {
     if ((playerSelection == 'Scissors' && computerSelection == 'Paper') || (playerSelection == 'Rock' && computerSelection == 'Scissors') || (playerSelection == 'Paper' && computerSelection == 'Rock')) {
-       const roundResult = document.querySelector('#roundResult');
-       roundResult.textContent = 'You have won!';
-       container.appendChild(roundResult);
-       const yourChoice = document.querySelector('#yourChoice');
-       yourChoice.textContent = 'You picked: ' + playerSelection +'.'; 
-       container.appendChild(yourChoice);
-       const computerChoice = document.querySelector('#computerChoice');
-       computerChoice.textContent = 'Computer picked: ' + computerSelection +'.'; 
-       container.appendChild(computerChoice);
+       singleResult = 'Player';
     }
     else if ((playerSelection == 'Paper' && computerSelection == 'Scissors') || (playerSelection == 'Scissors' && computerSelection == 'Rock') || (playerSelection == 'Rock' && computerSelection == 'Paper')) {
-        const roundResult = document.querySelector('#roundResult');
-        roundResult.textContent = 'You have lost!';
-        container.appendChild(roundResult);
-        const yourChoice = document.querySelector('#yourChoice');
-        yourChoice.textContent = 'You picked: ' + playerSelection +'.'; 
-        container.appendChild(yourChoice);
-        const computerChoice = document.querySelector('#computerChoice');
-        computerChoice.textContent = 'Computer picked: ' + computerSelection +'.'; 
-        container.appendChild(computerChoice);
+        singleResult = 'Computer';
     }
     else if (playerSelection == computerSelection) {
-        const roundResult = document.querySelector('#roundResult');
-        roundResult.textContent = 'You have tied!';
-        container.appendChild(roundResult);
-        const yourChoice = document.querySelector('#yourChoice');
-        yourChoice.textContent = 'You picked: ' + playerSelection +'.'; 
-        container.appendChild(yourChoice);
-        const computerChoice = document.querySelector('#computerChoice');
-        computerChoice.textContent = 'Computer picked: ' + computerSelection +'.'; 
-        container.appendChild(computerChoice);
+        singleResult = 'Tie';
     }
 };
 
+//play 5 rounds and keep score
+function game(event, singleRound) {
+    rounds++;
+    let playerSelection = event.target.id;
+    computerSelection = computerPlay();
+    singleRound = playRound(playerSelection, computerSelection);
+    if (rounds < 5) {
+      if (singleResult == 'Player') {
+        playerScore = ++playerScore;
+        }
+      else if (singleResult == 'Computer') {
+        computerScore = ++computerScore;
+        }
+      else if (singleResult == 'Tie') {
+        }
+    const scores = document.querySelector('#scores');
+    scores.textContent = 'Your score: ' + playerScore + ' Computer score: ' + computerScore;
+    const yourChoice = document.querySelector('#yourChoice');
+    yourChoice.textContent = 'Your choice: ' + playerSelection + '.';
+    const computerChoice = document.querySelector('#computerChoice');
+    computerChoice.textContent = 'Computer choice: ' + computerSelection + '.';
+    }
+    else if (rounds = 5) {
+        if (singleResult == 'Player') {
+            playerScore = ++playerScore;
+            }
+          else if (singleResult == 'Computer') {
+            computerScore = ++computerScore;
+            }
+          else if (singleResult == 'Tie') {
+            }
+    const scores = document.querySelector('#scores');
+    scores.textContent = 'Your score: ' + playerScore + ' Computer score: ' + computerScore;
+    const final = document.querySelector('#final');
+    if (playerScore > computerScore) { 
+        final.textContent = 'Game over! You won!'
+      } 
+    else if (playerScore < computerScore) { 
+        final.textContent = 'Game over! You lost!'
+    }
+    document.getElementById("Rock").disabled = true;
+    document.getElementById("Paper").disabled = true;
+    document.getElementById("Scissors").disabled = true;
+    const restartBtn = document.createElement('button');
+    restartBtn.classList.add('restartBtn');
+    restartBtn.textContent = 'Restart Game!';
+    final.appendChild(restartBtn);
+    restartBtn.addEventListener('click', restart);
+    };
+};
+
+function restart() {
+    playerScore = 0;
+    computerScore = 0;
+    rounds = 0;
+    document.getElementById("Rock").disabled = false;
+    document.getElementById("Paper").disabled = false;
+    document.getElementById("Scissors").disabled = false;
+    const scores = document.querySelector('#scores');
+    scores.textContent = 'Your score: ' + playerScore + ' Computer score: ' + computerScore;
+    const yourChoice = document.querySelector('#yourChoice');
+    yourChoice.textContent = 'Your choice: None selected';
+    const computerChoice = document.querySelector('#computerChoice');
+    computerChoice.textContent = 'Computer choice: None selected';
+    final.textContent = '';
+}
 
 //add event listener to buttons that calls playRound with accurate playerSelection everytime button clicked
-
-//add click eventlistener to each button
 const buttons = document.querySelectorAll('button')
   buttons.forEach ((button) => {
-    button.addEventListener('click', playRound)
+    button.addEventListener('click', game) 
     });
 
-let yourScore = 0;
+let playerScore = 0;
+let singleResult;
 let computerScore = 0;
-let round = 0;
+let rounds = 0;
