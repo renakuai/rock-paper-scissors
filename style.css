@@ -1,0 +1,25 @@
+body {
+  font-family: 'Roboto Mono', monospace;
+}
+.content {
+  margin: 200px auto;
+  width: 800px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+input[type='image'] {
+  flex-direction: row;
+  margin: 30px;
+}
+input[type='image']:hover{
+    transform: scale(1.5);
+}
+#images {
+    flex-direction: row;
+}
+#results {
+    flex-direction: row;
+}
+
+

@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Rock, Paper, Scissors</title>
     <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&display=swap" rel="stylesheet">
   </head>
   <body>
-    <div id="container">
-        <button id="Rock">Rock</button>
-        <button id="Paper">Paper</button>
-        <button id="Scissors">Scissors</button>
-    </div>
-    <div id="results">
+    <div class="content">
+      <div id="images">
+          <input type="image" src="rock.svg" id="Rock">
+          <input type="image" src="paper.svg" id="Paper">
+          <input type="image" src="scissors.svg" id="Scissors">
+      </div>
+      <div id="results">
         <p id="scores"></p>
         <p id="yourChoice"></p>
         <p id="computerChoice"></p>
         <p id="final"></p>
+      </div>
     </div>
   </body>
 </html>

@@ -68,6 +68,7 @@ function game(event, singleRound) {
     };
 };
 
+//restarting the game
 function restart() {
     playerScore = 0;
     computerScore = 0;
@@ -85,9 +86,9 @@ function restart() {
 }
 
 //add event listener to buttons that calls playRound with accurate playerSelection everytime button clicked
-const buttons = document.querySelectorAll('button')
-  buttons.forEach ((button) => {
-    button.addEventListener('click', game) 
+const buttons = document.querySelectorAll('input')
+  buttons.forEach ((input) => {
+    input.addEventListener('click', game) 
     });
 
 let playerScore = 0;
