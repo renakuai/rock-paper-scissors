@@ -1,0 +1,42 @@
+body {
+  font-family: 'Roboto Mono', monospace;
+}
+.content {
+  margin: 150px auto;
+  width: 800px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+input[type='image'] {
+  flex-direction: row;
+  margin: 30px;
+}
+input[type='image']:hover{
+  transform: scale(1.5);
+}
+input[type='image']:active{
+    transform: scale(1);
+  }
+#images {
+    flex-direction: row;
+}
+#results {
+    flex-direction: row;
+}
+#final {
+    font-size: 24px;
+}
+.restartBtn {
+    background-color: white;
+    color: #000;
+    font-size: 20px;
+    font-family: 'Roboto Mono', monospace;
+    transition-duration: 0.4s;
+}
+.restartBtn:hover {
+    background-color: black;
+    color: white;
+}
+
+
