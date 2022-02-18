@@ -23,48 +23,72 @@ function game(event, singleRound) {
     let playerSelection = event.target.id;
     computerSelection = computerPlay();
     singleRound = playRound(playerSelection, computerSelection);
+    var intro = document.getElementById('intro');
+    intro.style.visibility = "hidden"
     if (rounds < 5) {
       if (singleResult == 'Player') {
         playerScore = ++playerScore;
+        scoreLoad();
         }
       else if (singleResult == 'Computer') {
         computerScore = ++computerScore;
+        scoreLoad();
         }
       else if (singleResult == 'Tie') {
+        scoreLoad();
         }
     const scores = document.querySelector('#scores');
-    scores.textContent = 'Your score: ' + playerScore + ' Computer score: ' + computerScore;
+    setTimeout(() => {scores.textContent = 'Your score: ' + playerScore + ' Computer score: ' + computerScore}, 500);
     const yourChoice = document.querySelector('#yourChoice');
     yourChoice.textContent = 'Your choice: ' + playerSelection + '.';
     const computerChoice = document.querySelector('#computerChoice');
-    computerChoice.textContent = 'Computer choice: ' + computerSelection + '.';
+    setTimeout(() => {computerChoice.textContent = 'Computer choice: ' + computerSelection + '.'}, 500);
     }
     else if (rounds = 5) {
         if (singleResult == 'Player') {
             playerScore = ++playerScore;
+            scoreLoad();
             }
           else if (singleResult == 'Computer') {
             computerScore = ++computerScore;
+            scoreLoad();
             }
           else if (singleResult == 'Tie') {
+            scoreLoad();
             }
+    const yourChoice = document.querySelector('#yourChoice');
+    yourChoice.textContent = 'Your choice: ' + playerSelection + '.';
+    const computerChoice = document.querySelector('#computerChoice');
+    setTimeout(() => {computerChoice.textContent = 'Computer choice: ' + computerSelection + '.'}, 500);
     const scores = document.querySelector('#scores');
-    scores.textContent = 'Your score: ' + playerScore + ' Computer score: ' + computerScore;
+    setTimeout(() => {scores.textContent = 'Your score: ' + playerScore + ' Computer score: ' + computerScore}, 500);
     const final = document.querySelector('#final');
     if (playerScore > computerScore) { 
-        final.textContent = 'Game over! You won!'
+        setTimeout(() => {
+            document.getElementById("images").innerHTML = '';
+            const final = document.getElementById('final');
+            final.textContent = 'Game over! You won!';
+            const restartBtn = document.createElement('button');
+            restartBtn.classList.add('restartBtn');
+            restartBtn.textContent = 'Restart Game!';
+            const redo = document.querySelector('#redo');
+            redo.appendChild(restartBtn)
+            restartBtn.addEventListener('click', restart);
+        }, 500)
       } 
     else if (playerScore < computerScore) { 
-        final.textContent = 'Game over! You lost!'
+        setTimeout(() => {
+            document.getElementById("images").innerHTML = '';
+            const final = document.getElementById('final');
+            final.textContent = 'Game over! You lost!';
+            const restartBtn = document.createElement('button');
+            restartBtn.classList.add('restartBtn');
+            restartBtn.textContent = 'Restart Game!';
+            const redo = document.querySelector('#redo');
+            redo.appendChild(restartBtn)
+            restartBtn.addEventListener('click', restart);
+        }, 500)
     }
-    document.getElementById("Rock").disabled = true;
-    document.getElementById("Paper").disabled = true;
-    document.getElementById("Scissors").disabled = true;
-    const restartBtn = document.createElement('button');
-    restartBtn.classList.add('restartBtn');
-    restartBtn.textContent = 'Restart Game!';
-    final.appendChild(restartBtn);
-    restartBtn.addEventListener('click', restart);
     };
 };
 
@@ -73,9 +97,7 @@ function restart() {
     playerScore = 0;
     computerScore = 0;
     rounds = 0;
-    document.getElementById("Rock").disabled = false;
-    document.getElementById("Paper").disabled = false;
-    document.getElementById("Scissors").disabled = false;
+    document.getElementById("images").innerHTML = old;
     const scores = document.querySelector('#scores');
     scores.textContent = 'Your score: ' + playerScore + ' Computer score: ' + computerScore;
     const yourChoice = document.querySelector('#yourChoice');
@@ -83,14 +105,24 @@ function restart() {
     const computerChoice = document.querySelector('#computerChoice');
     computerChoice.textContent = 'Computer choice: None selected';
     final.textContent = '';
+    redo.textContent = '';
+}
+
+function scoreLoad() {
+    const yourChoice = document.querySelector('#yourChoice');
+    yourChoice.textContent = 'Your choice: --';
+    const computerChoice = document.querySelector('#computerChoice');
+    computerChoice.textContent = 'Computer choice: --';
 }
 
 //add event listener to buttons that calls playRound with accurate playerSelection everytime button clicked
-const buttons = document.querySelectorAll('input')
-  buttons.forEach ((input) => {
-    input.addEventListener('click', game) 
-    });
+const buttons = document.querySelectorAll('#images')
+buttons.forEach ((input) => {
+    input.addEventListener('click', game);
+});
 
+const remember = document.getElementById("images"); 
+var old = remember.innerHTML; 
 let playerScore = 0;
 let singleResult;
 let computerScore = 0;
